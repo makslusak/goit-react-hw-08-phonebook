@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 
-export const ContactList = ({ onRemove, state }) => {
+export const ContactList = ({ onRemove, contacts, filter }) => {
   return (
     <ul className={css.contactList}>
-      {state.contacts.length > 0 &&
-        state.contacts
+      {contacts?.length > 0 &&
+        contacts
           .filter(contact =>
-            contact.name.toLowerCase().includes(state.filter.toLowerCase())
+            contact.name.toLowerCase().includes(filter.toLowerCase())
           )
           .map(contact => {
             return (
@@ -31,8 +31,6 @@ export const ContactList = ({ onRemove, state }) => {
 };
 ContactList.propTypes = {
   onRemove: PropTypes.func.isRequired,
-  state: PropTypes.shape({
-    contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
-    filter: PropTypes.string,
-  }).isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filter: PropTypes.string.isRequired,
 };
