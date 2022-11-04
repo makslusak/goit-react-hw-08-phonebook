@@ -1,8 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import css from './ContactList.module.css';
+import { removeContactAction } from 'redux/phonebook/actions.phonebook';
 
-export const ContactList = ({ onRemove, contacts, filter }) => {
+export const ContactList = () => {
+  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
+  const handleRemoveContact = evt => {
+    dispatch(removeContactAction(evt.target.id));
+  };
+
   return (
     <ul className={css.contactList}>
       {contacts?.length > 0 &&
@@ -16,7 +25,7 @@ export const ContactList = ({ onRemove, contacts, filter }) => {
                 <span className={css.name}>{contact.name}: </span>
                 <span className={css.number}>{contact.number}</span>
                 <button
-                  onClick={onRemove}
+                  onClick={handleRemoveContact}
                   id={contact.id}
                   className={css.button}
                   type="button"
@@ -28,9 +37,4 @@ export const ContactList = ({ onRemove, contacts, filter }) => {
           })}
     </ul>
   );
-};
-ContactList.propTypes = {
-  onRemove: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  filter: PropTypes.string.isRequired,
 };
