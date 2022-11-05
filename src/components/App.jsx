@@ -4,7 +4,7 @@ import css from './ContactForm/ContactForm.module.css';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { useSelector } from 'react-redux';
+
 
 export const App = () => {
 
