@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterContactAction } from 'redux/phonebook/actions.phonebook';
+import { filterContactAction } from 'redux/slice';
 
 export const Filter = () => {
   const filter = useSelector(state => state.filter);

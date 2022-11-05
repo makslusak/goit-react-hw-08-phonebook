@@ -4,22 +4,20 @@ import css from './ContactForm/ContactForm.module.css';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { useDispatch, useSelector } from 'react-redux';
-import { fromLocalStorage } from 'redux/phonebook/actions.phonebook';
+import { useSelector } from 'react-redux';
 
 export const App = () => {
-  const dispatch = useDispatch;
   const contacts = useSelector(state => state.contacts);
 
-  useEffect(() => {
-    const parsedContacts = JSON.parse(localStorage.getItem('contactList'));
-    // dispatch(fromLocalStorage(parsedContacts));
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   const parsedContacts = JSON.parse(localStorage.getItem('contactList'));
+  //   // dispatch(fromLocalStorage(parsedContacts));
+  //   // eslint-disable-next-line
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('contactList', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contactList', JSON.stringify(contacts));
+  // }, [contacts]);
 
   return (
     <div className={css.container}>
