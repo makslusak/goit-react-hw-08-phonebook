@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  contacts: [],
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
   filter: '',
 };
 
@@ -9,25 +13,60 @@ export const phoneBookSlice = createSlice({
   name: 'phonebook',
   initialState: initialState,
   reducers: {
-    addContactAction: (state, action) => {
-      if (
-        state.contacts.some(contact => contact.name === action.payload.name)
-      ) {
-        alert(`${action.payload.name} is already in contacts`);
-      } else {
-        state.contacts.push(action.payload);
-      }
+    fetchContactInProgress: (state, action) => {
+      state.contacts.isLoading = true;
     },
-    removeContactAction: (state, action) => {
-      state.contacts = [
-        ...state.contacts.filter(contact => action.payload !== contact.id),
-      ];
+    fetchContactSuccess: (state, action) => {
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+      state.contacts.items = action.payload;
     },
+    fetchContactError: (state, action) => {
+      state.contacts.isLoading = false;
+      state.contacts.error = action.payload;
+    },
+
+    addContactInProgress: (state, action) => {
+      state.contacts.isLoading = true;
+    },
+    addContactSuccess: (state, action) => {
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+    },
+    addContactError: (state, action) => {
+      state.contacts.isLoading = false;
+      state.contacts.error = action.payload;
+    },
+
+    removeContactInProgress: (state, action) => {
+      state.contacts.isLoading = true;
+    },
+    removeContactSuccess: (state, action) => {
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+    },
+    removeContactError: (state, action) => {
+      state.contacts.isLoading = false;
+      state.contacts.error = action.payload;
+    },
+
     filterContactAction: (state, action) => {
       state.filter = action.payload;
     },
   },
 });
 
-export const { addContactAction, removeContactAction, filterContactAction } =
-  phoneBookSlice.actions;
+export const {
+  fetchContactInProgress,
+  fetchContactSuccess,
+  fetchContactError,
+
+  addContactInProgress,
+  addContactSuccess,
+  addContactError,
+
+  removeContactInProgress,
+  removeContactSuccess,
+  removeContactError,
+  filterContactAction,
+} = phoneBookSlice.actions;
