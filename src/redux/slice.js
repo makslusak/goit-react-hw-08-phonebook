@@ -10,7 +10,13 @@ export const phoneBookSlice = createSlice({
   initialState: initialState,
   reducers: {
     addContactAction: (state, action) => {
-      state.contacts.push(action.payload);
+      if (
+        state.contacts.some(contact => contact.name === action.payload.name)
+      ) {
+        alert(`${action.payload.name} is already in contacts`);
+      } else {
+        state.contacts.push(action.payload);
+      }
     },
     removeContactAction: (state, action) => {
       state.contacts = [
