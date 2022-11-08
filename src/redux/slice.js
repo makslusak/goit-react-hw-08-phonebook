@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchContacts, addContact, removeContacts } from './operations';
 
 const initialState = {
   contacts: {
@@ -12,61 +13,51 @@ const initialState = {
 export const phoneBookSlice = createSlice({
   name: 'phonebook',
   initialState: initialState,
-  reducers: {
-    fetchContactInProgress: (state, action) => {
+  extraReducers: {
+    [fetchContacts.pending](state, action) {
       state.contacts.isLoading = true;
     },
-    fetchContactSuccess: (state, action) => {
+    [fetchContacts.fulfilled](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = null;
       state.contacts.items = action.payload;
     },
-    fetchContactError: (state, action) => {
+    [fetchContacts.rejected](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = action.payload;
     },
-
-    addContactInProgress: (state, action) => {
+    [addContact.pending](state, action) {
       state.contacts.isLoading = true;
     },
-    addContactSuccess: (state, action) => {
+    [addContact.fulfilled](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = null;
+      state.contacts.items = [...state.contacts.items, action.payload];
     },
-    addContactError: (state, action) => {
+    [addContact.rejected](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = action.payload;
     },
-
-    removeContactInProgress: (state, action) => {
+    [removeContacts.pending](state, action) {
       state.contacts.isLoading = true;
     },
-    removeContactSuccess: (state, action) => {
+    [removeContacts.fulfilled](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = null;
+      state.contacts.items = state.contacts.items.filter(
+        contact => contact.id !== action.payload.id
+      );
     },
-    removeContactError: (state, action) => {
+    [removeContacts.rejected](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = action.payload;
     },
-
-    filterContactAction: (state, action) => {
+  },
+  reducers: {
+    filterContact: (state, action) => {
       state.filter = action.payload;
     },
   },
 });
-
-export const {
-  fetchContactInProgress,
-  fetchContactSuccess,
-  fetchContactError,
-
-  addContactInProgress,
-  addContactSuccess,
-  addContactError,
-
-  removeContactInProgress,
-  removeContactSuccess,
-  removeContactError,
-  filterContactAction,
-} = phoneBookSlice.actions;
+export const { filterContact } = phoneBookSlice.actions;
+export const contactReducer = phoneBookSlice.reducer;

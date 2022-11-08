@@ -4,10 +4,11 @@ import css from './ContactList.module.css';
 
 import { useEffect } from 'react';
 import { fetchContacts, removeContacts } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 
 export const ContactList = () => {
   const filter = useSelector(state => state.filter);
-  const { items, isLoading, error } = useSelector(state => state.contacts);
+  const { items, isLoading, error } = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
