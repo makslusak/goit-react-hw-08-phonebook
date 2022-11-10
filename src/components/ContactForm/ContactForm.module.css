@@ -1,7 +1,3 @@
-.container {
-  padding: 30px;
-  color: rgb(0, 88, 110);
-}
 .form {
   display: flex;
   flex-direction: column;
