@@ -6,7 +6,7 @@ import css from './ContactsPage.module.css';
 export const ContactsPage = () => {
   return (
     <>
-      <main>
+      <main className={css.main}>
         <h1 className={css.title}>Phonebook</h1>
         <div className={css.wrapper}>
           <div>

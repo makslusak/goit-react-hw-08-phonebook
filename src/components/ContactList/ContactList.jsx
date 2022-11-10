@@ -33,7 +33,9 @@ export const ContactList = () => {
               return (
                 <li className={css.item} key={contact.id}>
                   <span className={css.name}>{contact.name}: </span>
-                  <span className={css.number}>{contact.phone}</span>
+                  <a className={css.number} href={`tel:${contact.phone}`}>
+                    {contact.phone}
+                  </a>
                   <button
                     onClick={handleRemoveContact}
                     id={contact.id}
