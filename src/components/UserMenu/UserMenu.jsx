@@ -9,19 +9,20 @@ export const UserMenu = () => {
   const dispatch = useDispatch();
   const userEmail = useSelector(selectUserEmail);
   const userName = useSelector(selectUserName);
+  console.log('userEmail', userEmail);
+  console.log('userName', userName);
 
   const handleLogout = () => {
-    dispatch(logoutOperation);
-    console.log('logoutOperation');
+    dispatch(logoutOperation());
   };
 
   return (
     <aside className={css.sidebar}>
       <div className={css.wrapper}>
         {userName === 'Unknown user' ? (
-          <img className={css.avatar} src={unknownUser} />
+          <img className={css.avatar} src={unknownUser} alt="avatar" />
         ) : (
-          <img className={css.avatar} src={user} />
+          <img className={css.avatar} src={user} alt="avatar" />
         )}
 
         <p className={css.name}>{userName}</p>

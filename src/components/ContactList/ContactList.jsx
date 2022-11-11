@@ -19,7 +19,6 @@ export const ContactList = () => {
   const filtered = useSelector(selectFilter);
   const { isLoading, error } = useSelector(selectContacts);
   const items = useSelector(selectItems);
-  console.log(items);
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);

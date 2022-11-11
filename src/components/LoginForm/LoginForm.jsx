@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginOperation } from 'redux/auth/auth-operations';
 import css from './LoginForm.module.css';
@@ -7,7 +6,6 @@ import css from './LoginForm.module.css';
 export const LoginForm = () => {
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -32,7 +30,6 @@ export const LoginForm = () => {
     setSignInPassword('');
 
     dispatch(loginOperation(userData));
-    navigate('/contacts');
   };
 
   return (

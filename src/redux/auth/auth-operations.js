@@ -16,7 +16,6 @@ export const token = {
 export const authInitialState = {
   status: Status.init,
   access_token: '',
-  token_type: '',
   error: '',
   isAuthenticated: false,
   user: {
@@ -55,6 +54,19 @@ export const logoutOperation = createAsyncThunk(
     try {
       await axios.post('/users/logout');
       token.unset();
+    } catch (err) {}
+  }
+);
+
+export const currentUserOperation = createAsyncThunk(
+  'auth/current',
+  async (_, thunkApi) => {
+    try {
+      const state = thunkApi.getState();
+      token.set(state.auth.access_token);
+      const { data } = await axios.get('/users/current');
+
+      return data;
     } catch (err) {}
   }
 );

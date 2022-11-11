@@ -11,6 +11,7 @@ export const ContactForm = () => {
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(selectItems);
+
   const fields = {
     name: setName,
     number: setNumber,
@@ -23,13 +24,13 @@ export const ContactForm = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    // if (contacts.some(contact => contact.name.includes(name))) {
-    //   alert(`${name} is already in contacts`);
-    // } else {
-    dispatch(addContact({ name, number }));
-    setName('');
-    setNumber('');
-    // }
+    if (contacts.some(contact => contact.name.includes(name))) {
+      alert(`${name} is already in contacts`);
+    } else {
+      dispatch(addContact({ name, number }));
+      setName('');
+      setNumber('');
+    }
   };
 
   return (

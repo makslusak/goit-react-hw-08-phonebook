@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Status } from 'helpers/status';
 import {
   authInitialState,
+  currentUserOperation,
   loginOperation,
   logoutOperation,
   registrationOperation,
-  token,
 } from './auth-operations';
 
 export const authSlice = createSlice({
@@ -55,7 +55,19 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
     },
     [logoutOperation.rejected](state, action) {
+      state.status = Status.error;
+      state.error = action.payload;
+    },
+    [currentUserOperation.pending](state) {
       state.status = Status.loading;
+    },
+    [currentUserOperation.fulfilled](state, action) {
+      state.status = Status.success;
+      state.user.email = action.payload?.email;
+      state.user.name = action.payload.name;
+      state.isAuthenticated = true;
+    },
+    [currentUserOperation.rejected](state, action) {
       state.status = Status.error;
       state.error = action.payload;
     },

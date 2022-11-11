@@ -4,7 +4,11 @@
   margin-left: 35px;
 }
 .nav a {
-  color: rgb(0, 88, 110);
+  color: rgb(1 131 155);
   font-size: 20px;
   font-weight: 500;
+}
+.icon {
+  margin-right: 5px;
+  margin-bottom: -2px;
 }

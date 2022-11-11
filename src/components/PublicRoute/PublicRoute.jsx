@@ -1,5 +1,9 @@
-import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet } from 'react-router-dom';
+import { selectIsAuthenticated } from 'redux/auth/auth-selectors';
 
-export const PublicRoute = () => {
-  return <Outlet />;
+const PublicRoute = () => {
+  const isLogin = useSelector(selectIsAuthenticated);
+  return !isLogin ? <Outlet /> : <Navigate to="/" />;
 };
+export default PublicRoute;

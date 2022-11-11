@@ -1,14 +1,13 @@
 .sidebar {
-  width: 300px;
+  width: 250px;
   box-shadow: 9px 2px 15px -8px rgba(0, 0, 0, 0.3);
   min-height: 700px;
 }
 .wrapper {
-  padding-top: 20px;
+  padding: 20px 35px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: center;
 }
 .main {
   width: 100%;
@@ -19,8 +18,8 @@
   justify-content: center;
   cursor: pointer;
   padding: 2px 7px;
-  margin-left: 10px;
-  border: 2px solid rgb(0, 88, 110);
+  width: 70px;
+  border: 2px solid rgb(1 131 155);
   background-color: #fff;
   color: #f80;
 }

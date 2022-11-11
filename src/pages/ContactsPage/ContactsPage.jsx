@@ -1,20 +1,9 @@
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { selectIsAuthenticated } from 'redux/auth/auth-selectors';
 import css from './ContactsPage.module.css';
 
-export const ContactsPage = () => {
-  // const navigate = useNavigate();
-  // const isLogedIn = useSelector(selectIsAuthenticated);
-
-  // useEffect(() => {
-  //   !isLogedIn && navigate('/login');
-  // }, []);
-
+const ContactsPage = () => {
   return (
     <>
       <main className={css.main}>
@@ -34,3 +23,4 @@ export const ContactsPage = () => {
     </>
   );
 };
+export default ContactsPage;
