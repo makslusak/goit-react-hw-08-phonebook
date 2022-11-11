@@ -9,8 +9,6 @@ export const UserMenu = () => {
   const dispatch = useDispatch();
   const userEmail = useSelector(selectUserEmail);
   const userName = useSelector(selectUserName);
-  console.log('userEmail', userEmail);
-  console.log('userName', userName);
 
   const handleLogout = () => {
     dispatch(logoutOperation());
