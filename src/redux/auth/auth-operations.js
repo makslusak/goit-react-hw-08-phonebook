@@ -4,7 +4,7 @@ import { Status } from 'helpers/status';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
-const token = {
+export const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
@@ -18,6 +18,11 @@ export const authInitialState = {
   access_token: '',
   token_type: '',
   error: '',
+  isAuthenticated: false,
+  user: {
+    name: 'Unknown user',
+    email: '',
+  },
 };
 
 export const registrationOperation = createAsyncThunk(
@@ -40,6 +45,16 @@ export const loginOperation = createAsyncThunk(
       token.set(data.token);
 
       return data;
+    } catch (err) {}
+  }
+);
+
+export const logoutOperation = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkApi) => {
+    try {
+      await axios.post('/users/logout');
+      token.unset();
     } catch (err) {}
   }
 );

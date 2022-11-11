@@ -1,6 +1,6 @@
 .sidebar {
-  width: 200px;
-  background-color: rgb(238, 238, 238);
+  width: 300px;
+  box-shadow: 9px 2px 15px -8px rgba(0, 0, 0, 0.3);
   min-height: 700px;
 }
 .wrapper {
@@ -12,4 +12,30 @@
 }
 .main {
   width: 100%;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px 7px;
+  margin-left: 10px;
+  border: 2px solid rgb(0, 88, 110);
+  background-color: #fff;
+  color: #f80;
+}
+.button:hover,
+.button:focus {
+  background-color: rgba(0, 150, 188, 0.2);
+}
+.name {
+  font-weight: 500;
+  font-size: 20px;
+}
+.email {
+  font-weight: 400;
+}
+.avatar {
+  border-radius: 50%;
+  width: 120px;
 }

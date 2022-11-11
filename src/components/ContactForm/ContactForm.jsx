@@ -3,10 +3,8 @@ import { useState } from 'react';
 
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { nanoid } from 'nanoid';
-import { addContact } from 'redux/operations';
-import { selectItems } from 'redux/selectors';
+import { addContact } from 'redux/phonebook/phonebook-operations';
+import { selectItems } from 'redux/phonebook/phonebook-selectors';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -25,13 +23,13 @@ export const ContactForm = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    if (contacts.some(contact => contact.name.includes(name))) {
-      alert(`${name} is already in contacts`);
-    } else {
-      dispatch(addContact({ name, number, id: nanoid() }));
-      setName('');
-      setNumber('');
-    }
+    // if (contacts.some(contact => contact.name.includes(name))) {
+    //   alert(`${name} is already in contacts`);
+    // } else {
+    dispatch(addContact({ name, number }));
+    setName('');
+    setNumber('');
+    // }
   };
 
   return (

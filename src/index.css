@@ -51,3 +51,6 @@ img {
 a {
   text-decoration: none;
 }
+nav .active {
+  color: #f80;
+}

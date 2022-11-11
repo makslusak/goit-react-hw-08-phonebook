@@ -3,14 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import css from './ContactList.module.css';
 
 import { useEffect } from 'react';
-import { fetchContacts, removeContacts } from 'redux/operations';
-import { selectContacts } from 'redux/selectors';
+import {
+  fetchContacts,
+  removeContacts,
+} from 'redux/phonebook/phonebook-operations';
+import {
+  selectContacts,
+  selectFilter,
+  selectItems,
+} from 'redux/phonebook/phonebook-selectors';
 
 export const ContactList = () => {
-  const filter = useSelector(state => state.filter);
-  const { items, isLoading, error } = useSelector(selectContacts);
   const dispatch = useDispatch();
 
+  const filtered = useSelector(selectFilter);
+  const { isLoading, error } = useSelector(selectContacts);
+  const items = useSelector(selectItems);
+  console.log(items);
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -27,14 +36,14 @@ export const ContactList = () => {
         {items?.length > 0 &&
           items
             .filter(contact =>
-              contact?.name?.toLowerCase().includes(filter.toLowerCase())
+              contact?.name.toLowerCase().includes(filtered?.toLowerCase())
             )
             .map(contact => {
               return (
                 <li className={css.item} key={contact.id}>
                   <span className={css.name}>{contact.name}: </span>
-                  <a className={css.number} href={`tel:${contact.phone}`}>
-                    {contact.phone}
+                  <a className={css.number} href={`tel:${contact.number}`}>
+                    {contact.number}
                   </a>
                   <button
                     onClick={handleRemoveContact}

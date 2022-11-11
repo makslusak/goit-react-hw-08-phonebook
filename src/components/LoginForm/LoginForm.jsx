@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginOperation } from 'redux/auth/auth-operations';
 import css from './LoginForm.module.css';
@@ -6,6 +7,7 @@ import css from './LoginForm.module.css';
 export const LoginForm = () => {
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -30,6 +32,7 @@ export const LoginForm = () => {
     setSignInPassword('');
 
     dispatch(loginOperation(userData));
+    navigate('/contacts');
   };
 
   return (
@@ -38,7 +41,7 @@ export const LoginForm = () => {
         Enter your email
         <input
           onChange={handleSignInInput}
-          className=""
+          className={css.input}
           type="email"
           value={signInEmail}
           name="signInEmail"
@@ -48,14 +51,14 @@ export const LoginForm = () => {
         Enter password
         <input
           onChange={handleSignInInput}
-          className=""
+          className={css.input}
           type="password"
           value={signInPassword}
           name="signInPassword"
         />
       </label>
 
-      <button className="" type="submit">
+      <button className={css.button} type="submit">
         Sign in
       </button>
     </form>

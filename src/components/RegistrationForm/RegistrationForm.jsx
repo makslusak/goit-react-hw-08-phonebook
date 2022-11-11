@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { registrationOperation } from 'redux/auth/auth-operations';
 import css from './RegistrationForm.module.css';
 
@@ -8,6 +9,8 @@ export const RegistrationForm = () => {
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [signUpPasswordRepeat, setSignUpPasswordRepeat] = useState('');
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -36,6 +39,7 @@ export const RegistrationForm = () => {
       setSignUpPassword('');
       setSignUpPasswordRepeat('');
       dispatch(registrationOperation(userData));
+      navigate('/contacts');
     } else {
       alert('Passwords do not match ');
     }
@@ -47,7 +51,7 @@ export const RegistrationForm = () => {
         Enter your name
         <input
           onChange={handleSignUpInput}
-          className=""
+          className={css.input}
           type="name"
           value={signUpName}
           name="signUpName"
@@ -58,7 +62,7 @@ export const RegistrationForm = () => {
         Enter your email
         <input
           onChange={handleSignUpInput}
-          className=""
+          className={css.input}
           type="email"
           value={signUpEmail}
           name="signUpEmail"
@@ -69,7 +73,7 @@ export const RegistrationForm = () => {
         Enter password
         <input
           onChange={handleSignUpInput}
-          className=""
+          className={css.input}
           type="password"
           value={signUpPassword}
           name="signUpPassword"
@@ -80,14 +84,14 @@ export const RegistrationForm = () => {
         Repeat password
         <input
           onChange={handleSignUpInput}
-          className=""
+          className={css.input}
           type="password"
           value={signUpPasswordRepeat}
           name="signUpPasswordRepeat"
         />
       </label>
 
-      <button className="" type="submit">
+      <button className={css.button} type="submit">
         Sign up
       </button>
     </form>
